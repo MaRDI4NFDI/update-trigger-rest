@@ -1,12 +1,9 @@
 # update-trigger-rest
 A rest service to trigger updates on the portal, e.g. to get newest data from WikiData or to add a LLM generated article summary.
 
-### Examples using curl
+### Examples
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -d '{
-  "QID": "Q123",
-  "caller": "MaRDI portal"
-}' http://localhost:5000/generate_article_summary
+http://localhost:5000/generate_article_summary?QID=Q92247
 ```
 

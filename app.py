@@ -33,26 +33,19 @@ def hello():
     return "Hello World!"
 
 
-@app.route('/generate_article_summary', methods=['POST'])
+@app.route('/generate_article_summary', methods=['GET'])
 def generate_article_summary():
     """
-    Handles POST requests to the "/generate_article_summary" endpoint.
+    Handles GET requests to the "/generate_article_summary" endpoint.
       - Expects the client to send a JSON payload in the request body.
       - Returns a 204 (No Content response) to indicate successful processing.
     """
     logger.debug("called: /generate_article_summary")
 
-    # Get JSON payload as a dictionary
-    data = request.get_json()
-
-    # Check if data has been specified
-    if data is None:
-        return {"error": "Invalid or missing JSON payload"}, 400
-
-    # Check if needed fields are available
-    qid = data.get("QID", "")
+    # Extract QID from query parameters
+    qid = request.args.get('QID', "")
     if not qid:
-        return {"error": "Missing 'QID' in JSON payload"}, 400
+        return {"error": "Missing 'QID' in query parameters"}, 400
 
     logger.debug(f"QID: {qid}")
 
